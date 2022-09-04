@@ -31,6 +31,10 @@ console.log("Harsh");
         history.push("/update");
       }
     
+  const todo = async (e) => {
+  
+        history.push("/todo");
+      }
 
 
   return (
@@ -44,13 +48,15 @@ console.log("Harsh");
           </li>
           <li className="sidebarListItem" onClick={getevery}>
             <PlayCircleFilledOutlined className="sidebarIcon" />
-            <span className="sidebarListItemText">Videos</span>
+            <span className="sidebarListItemText">Allpost</span>
           </li>
           <li className="sidebarListItem" onClick={update}>
             <Group className="sidebarIcon" />
-            <span className="sidebarListItemText">Groups</span>
+            <span className="sidebarListItemText">Update Profile</span>
           </li>
-          {/*<li className="sidebarListItem">
+          {/*
+   
+          <li className="sidebarListItem" onClick={todo}>
             <Bookmark className="sidebarIcon" />
             <span className="sidebarListItemText">Bookmarks</span>
           </li>

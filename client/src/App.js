@@ -4,6 +4,9 @@ import Profile from "./pages/profile/Profile";
 import Register from "./pages/register/Register";
 import Allpost from "./pages/allpost/Allpost";
 import Update from "./pages/updatepage/Update";
+import Todo from "./pages/todo/Todo";
+import Online from "./pages/createconversation/Createconversation";
+
 
 import {
   BrowserRouter as Router,
@@ -29,6 +32,13 @@ function App() {
         <Route exact path="/update">
         < Update/>
         </Route>
+        <Route exact path="/todo">
+        < Todo/>
+        </Route>
+        <Route exact path="/online">
+        < Online user1={user._id}/>
+        </Route>
+        
         <Route path="/login">{user ? <Redirect to="/" /> : <Login />}</Route>
         <Route path="/register">
           {user ? <Redirect to="/" /> : <Register />}

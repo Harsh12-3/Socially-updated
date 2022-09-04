@@ -6,16 +6,40 @@ import {
   EmojiEmotions,
   Cancel,
 } from "@material-ui/icons";
-import { useContext, useRef, useState } from "react";
+import { useContext, useRef, useState,useEffect } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
+import { useHistory } from "react-router";
 
 export default function Share() {
   const { user } = useContext(AuthContext);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+  const history = useHistory();
   const desc = useRef();
   const [file, setFile] = useState(null);
+const [user1,setUser]= useState(user);
+  useEffect(() => {
+    
+    const getUser = async () => {
+      try {
+        const res = await axios.get("/users/ff/" + user._id);
+        setUser(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getUser();
+  }, []);
 
+
+  const todo = async (e) => {
+  console.log("Yes");
+    history.push("/todo");
+  }
+  const online = async (e) => {
+    console.log("Yes");
+      history.push("/online");
+    }
   const submitHandler = async (e) => {
     e.preventDefault();
     const newPost = {
@@ -46,8 +70,8 @@ export default function Share() {
           <img
             className="shareProfileImg"
             src={
-              user.profilePicture
-                ? PF + user.profilePicture
+              user1.profilePicture
+                ? PF + user1.profilePicture
                 : PF + "person/noAvatar.png"
             }
             alt=""
@@ -79,15 +103,15 @@ export default function Share() {
               />
             </label>
             <div className="shareOption">
-              <Label htmlColor="blue" className="shareIcon" />
-              <span className="shareOptionText">Tag</span>
+              <Label htmlColor="blue" className="shareIcon"/>
+              <span className="shareOptionText" onClick={todo}>Todo</span>
             </div>
             <div className="shareOption">
-              <Room htmlColor="green" className="shareIcon" />
-              <span className="shareOptionText">Location</span>
+              <EmojiEmotions htmlColor="green" className="shareIcon" />
+              <span className="shareOptionText" onClick={online}>New friend</span>
             </div>
             <div className="shareOption">
-              <EmojiEmotions htmlColor="goldenrod" className="shareIcon" />
+              <Cancel htmlColor="goldenrod" className="shareIcon" />
               <span className="shareOptionText" >Feelings</span>
             </div>
           </div>

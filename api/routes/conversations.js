@@ -5,6 +5,7 @@ const Conversation = require("../models/Conversation");
 
 router.post("/", async (req, res) => {
   const newConversation = new Conversation({
+    
     members: [req.body.senderId, req.body.receiverId],
   });
 
@@ -41,5 +42,7 @@ router.get("/find/:firstUserId/:secondUserId", async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+
 
 module.exports = router;

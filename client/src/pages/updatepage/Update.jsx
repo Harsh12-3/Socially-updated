@@ -120,16 +120,16 @@ export default function Update() {
               className="loginInput"
               type="text"
             />
-            
+            <div className="filedesign">
 <input
 required
               type="file"
               id="file"
               accept=".png,.jpeg,.jpg"
               onChange={(e) => setFile(e.target.files[0])}
-className="loginInput"
+className="loginInput1"
             />
-
+</div>
             <button className="loginButton" type="submit">
               Update
             </button>

@@ -8,6 +8,8 @@ const multer = require("multer");
 const userRoute = require("./routes/users");
 const authRoute = require("./routes/auth");
 const postRoute = require("./routes/posts");
+const todoRoute = require("./routes/todo");
+
 const conversationRoute = require("./routes/conversations");
 const messageRoute = require("./routes/messages");
 const router = express.Router();
@@ -56,6 +58,8 @@ app.use("/api/users", userRoute);
 app.use("/api/posts", postRoute);
 app.use("/api/conversations", conversationRoute);
 app.use("/api/messages", messageRoute);
+app.use("/api/todo", todoRoute);
+
 
 app.listen(8800, () => {
   console.log("Backend server is running!");

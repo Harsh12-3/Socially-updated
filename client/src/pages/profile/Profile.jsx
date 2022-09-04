@@ -3,22 +3,25 @@ import Topbar from "../../components/topbar/Topbar";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Feed from "../../components/feed/Feed";
 import Rightbar from "../../components/rightbar/Rightbar";
-import { useEffect, useState } from "react";
+import { useEffect, useState,useContext } from "react";
 import axios from "axios";
+import { AuthContext } from "../../context/AuthContext";
+
 import { useParams } from "react-router";
 
 export default function Profile() {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
-  const [user, setUser] = useState({});
+  const [user1, setUser] = useState({});
   const username = useParams().username;
-
+  const { user } = useContext(AuthContext);
+ 
   useEffect(() => {
     const fetchUser = async () => {
-      const res = await axios.get(`/users?username=${username}`);
+      const res = await axios.get("http://localhost:8800/api/users/ff/" + user._id);
       setUser(res.data);
     };
     fetchUser();
-  }, [username]);
+  }, [user._id]);
 
   return (
     <>
@@ -31,8 +34,8 @@ export default function Profile() {
               <img
                 className="profileCoverImg"
                 src={
-                  user.coverPicture
-                    ? PF + user.coverPicture
+                  user1.coverPicture
+                    ? PF + user1.coverPicture
                     : PF + "person/noCover.png"
                 }
                 alt=""
@@ -40,21 +43,21 @@ export default function Profile() {
               <img
                 className="profileUserImg"
                 src={
-                  user.profilePicture
-                    ? PF + user.profilePicture
+                  user1.profilePicture
+                    ? PF + user1.profilePicture
                     : PF + "person/noAvatar.png"
                 }
                 alt=""
               />
             </div>
             <div className="profileInfo">
-              <h4 className="profileInfoName">{user.username}</h4>
-              <span className="profileInfoDesc">{user.desc}</span>
+              <h4 className="profileInfoName">{user1.username}</h4>
+              <span className="profileInfoDesc">{user1.desc}</span>
             </div>
           </div>
           <div className="profileRightBottom">
             <Feed username={username} />
-            <Rightbar user={user} />
+            <Rightbar user={user1} />
           </div>
         </div>
       </div>
